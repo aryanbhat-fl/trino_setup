@@ -1,0 +1,18 @@
+
+services:
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino3
+    ports:
+      - "8087:8080"
+    volumes:
+      - "./postgres.properties:/etc/trino/catalog/postgres.properties"
+      - "./post-init.sh:/tmp/post-init.sh"
+      - "./post-init.sql:/tmp/post-init.sql"
+    command: ["/bin/bash", "/tmp/post-init.sh"]  
+    networks:
+      - trino_setup  
+
+networks:
+  trino_setup:
+    name: trino_setup
