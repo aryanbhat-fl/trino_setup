@@ -6,9 +6,9 @@ services:
     ports:
       - "8086:8080"
     volumes:
-      - "./postgres.properties:/etc/trino/catalog/postgres.properties"
-      - "./postgresql.properties:/etc/trino/catalog/postgresql.properties"
-      - "./http.properties:/etc/trino/catalog/http.properties"
+      - "./catalog:/etc/trino/catalog"
+      - "./trino-plugins/trino-openapi-1.73:/usr/lib/trino/plugin/openapi"
+      - "./openapi-spec.yaml:/etc/trino/openapi-spec.yaml"
       - "./post-init.sh:/tmp/post-init.sh"
       - "./post-init.sql:/tmp/post-init.sql"
     command: ["/bin/bash", "/tmp/post-init.sh"]  
